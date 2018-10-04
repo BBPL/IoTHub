@@ -1,5 +1,6 @@
 from flask import render_template,request
 from app import app,db
+from controllers import postController as pC
 from app.models import Satellite
 import json
 import pychromecast
@@ -99,8 +100,9 @@ def connect():
 def connectPOST(request):
     if not request.json:
         return "wrong"
-    print(request.json)
-    return json.dumps(request.json)
+    #print(request.json)
+    #return json.dumps(request.json)
+    return pC.decode(request)
 def connectGET(request):
     return request.method
 
