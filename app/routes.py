@@ -27,6 +27,10 @@ def play():
     mc, _ = getMediaController()
     
     json = request.json
+
+    print("#####")
+    print(request.get_data())
+    print("#####")
     
     if 'url' not in json or not json['url'].endswith(".mp3"):
         return "You must provide url to an mp3 file"
@@ -67,6 +71,18 @@ def pause():
     mc.pause()
 
     return "success"
+
+@app.route("/sensor/light", methods=['POST'])
+def light():
+    json = request.json
+
+    if 'value' not in json:
+        return "failure, missing value"
+
+    print("Received light sensor value: ")
+    print(json['value'])
+    
+    return ""
 
 @app.route("/home/<string:name>", methods=['POST', 'GET'])
 def home(name):
